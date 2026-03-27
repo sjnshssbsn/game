@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Project_g
 {
@@ -8,7 +9,8 @@ namespace Project_g
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        private Texture2D _texture;
+        private Vector2 _playerPosition;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -35,9 +37,12 @@ namespace Project_g
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                Console.WriteLine();
+            }
 
-            base.Update(gameTime);
+            base.Update(gameTime); 
         }
 
         protected override void Draw(GameTime gameTime)
