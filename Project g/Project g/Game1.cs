@@ -12,7 +12,7 @@ namespace Project_g
         private Texture2D _squareTexture;
         private Vector2 _playerPosition;
         private Vector2 _playerSize;
-
+        private float _ground;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -26,7 +26,7 @@ namespace Project_g
         protected override void Initialize()
         {
             _playerSize = new Vector2(40, 65);
-
+            _ground = 400;
             base.Initialize();
         }
 
@@ -76,6 +76,11 @@ namespace Project_g
                     (int)_playerSize.X,
                     (int)_playerSize.Y),
                 Color.Beige);
+
+            _spriteBatch.Draw {
+                _squareTexture
+                    , new Rectangle( 0, (int) )
+            };
 
             _spriteBatch.End();
 
