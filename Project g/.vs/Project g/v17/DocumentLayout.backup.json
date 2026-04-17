@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,12 +23,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Player.cs",
+              "RelativeDocumentMoniker": "Project g\\Player.cs",
+              "ToolTip": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Player.cs",
+              "RelativeToolTip": "Project g\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T06:22:44.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Game1.cs",
               "RelativeDocumentMoniker": "Project g\\Game1.cs",
               "ToolTip": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Game1.cs",
               "RelativeToolTip": "Project g\\Game1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwFIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T08:39:56.519Z",
               "EditorCaption": ""

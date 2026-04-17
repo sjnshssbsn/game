@@ -79,7 +79,8 @@ namespace Project_g
 
             _spriteBatch.Draw {
                 _squareTexture
-                    , new Rectangle( 0, (int) )
+                    , new Rectangle(0, (int)_ground, 100, 100 ),
+                    Color.DarkRed;
             };
 
             _spriteBatch.End();
