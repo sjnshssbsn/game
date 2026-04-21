@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace Project_g
 {
@@ -10,6 +9,7 @@ namespace Project_g
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _squareTexture;
+        private Player _player;
         private Vector2 _playerPosition;
         private Vector2 _playerSize;
         private float _ground;
@@ -18,6 +18,11 @@ namespace Project_g
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _player = new Player(
+                new Vector2(100, 100),
+                new Vector2(40, 65)
+                );
 
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 800;
@@ -43,22 +48,30 @@ namespace Project_g
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            Vector2 direction = new Vector2();
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                _playerPosition.X--;
+                direction.X = -1;
             }
-
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                _playerPosition.X++;
+                direction.X = 1;
             }
 
-            if (_playerPosition.Y < 400)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                _playerPosition.Y++;
+                
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                direction.Y = 1;
+            }
+
+            _player.Move(direction);
+
+            if (_player.Position.Y < (_ground - _playerPosition.Y))
+                _player.Position.Y++;
             base.Update(gameTime);
         }
 
@@ -71,17 +84,17 @@ namespace Project_g
             _spriteBatch.Draw(
                 _squareTexture,
                 new Rectangle(
-                    (int)_playerPosition.X,
-                    (int)_playerPosition.Y,
-                    (int)_playerSize.X,
-                    (int)_playerSize.Y),
+                    (int)_player.Position.X,
+                    (int)_player.Position.Y,
+                    (int)_player.Size.X,
+                    (int)_player.Size.Y),
                 Color.Beige);
 
-            _spriteBatch.Draw {
-                _squareTexture
-                    , new Rectangle(0, (int)_ground, 100, 100 ),
-                    Color.DarkRed;
-            };
+            _spriteBatch.Draw (
+                _squareTexture,
+                new Rectangle(0, (int)_ground, 100, 100 ),
+                Color.DarkRed
+            );
 
             _spriteBatch.End();
 
