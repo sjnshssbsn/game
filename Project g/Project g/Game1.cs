@@ -60,15 +60,15 @@ namespace Project_g
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                
+                && (_jumpTimer <= 0))
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 direction.Y = 1;
             }
-
-            _player.Move(direction);
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _player.Move(direction, deltaTime);
 
             if (_player.Position.Y < (_ground - _playerPosition.Y))
                 _player.Position.Y++;
