@@ -13,6 +13,10 @@ namespace Project_g
         private Vector2 _playerPosition;
         private Vector2 _playerSize;
         private float _ground;
+        private float _jumpTimer;
+
+
+    private Texture2D _backgroung;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -39,6 +43,7 @@ namespace Project_g
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            _backgroung = Content.Load<Texture2D>("images/background");
             _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
             _squareTexture.SetData(new[] { Color.Beige });
         }
@@ -58,9 +63,8 @@ namespace Project_g
                 direction.X = 1;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
             {
-                && (_jumpTimer <= 0))
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
@@ -80,6 +84,8 @@ namespace Project_g
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(_backgroung, Vector2.Zero, Color.White);
 
             _spriteBatch.Draw(
                 _squareTexture,
