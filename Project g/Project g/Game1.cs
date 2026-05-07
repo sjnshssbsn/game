@@ -50,24 +50,28 @@ namespace Project_g
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
-                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            GamePadState gamePad = GamePad.GetState(PlayerIndex.One);
+            KeyboardState keyboard = Keyboard.GetState();
+
+            if (gamePad.Buttons.Back == ButtonState.Pressed
+               
+                || keyboard.IsKeyDown(Keys.Escape))
                 Exit();
             Vector2 direction = new Vector2();
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (keyboard.IsKeyDown(Keys.A))
             {
                 direction.X = -1;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (keyboard.IsKeyDown(Keys.D))
             {
                 direction.X = 1;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
+            if (keyboard.IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
             {
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (keyboard.IsKeyDown(Keys.S))
             {
                 direction.Y = 1;
             }
