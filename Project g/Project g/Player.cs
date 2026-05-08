@@ -7,21 +7,44 @@ namespace Project_g
 {
     public class Player
     {
+        private const float _gravity = 9.8f;
+        private const float _jumpForce = 450f;
+
+        private float _movementSpeed;
+
         public Vector2 Position;
         public Vector2 Size;
 
-        public Player() { }
+        public Vector2 Velocity;
+
         public Player(Vector2 position, Vector2 size)
         {
             Position = position;
             Size = size;
+
+            _movementSpeed = 300;
         }
 
-        public void Draw() { }
-
-        public void Move(Vector2 direction) 
+        public void Update(float dt)
         {
-            Position += direction;
+            Velocity.Y += _gravity;
+
+            Position.X += Velocity.X * _movementSpeed * dt;
+            Position.Y += Velocity.Y * dt;
+        }
+
+        public void Jump()
+        {
+            Velocity.Y -= _jumpForce;
+        }
+
+        public void Draw()
+        {
+        }
+
+        public void SetDirection(Vector2 direction)
+        {
+            Velocity.X = direction.X;
         }
     }
 }

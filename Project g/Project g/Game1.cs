@@ -9,33 +9,36 @@ namespace Project_g
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _squareTexture;
-        private Player _player;
-        private Vector2 _playerPosition;
-        private Vector2 _playerSize;
+        private Vector2 _screenSize;
         private float _ground;
-        private float _jumpTimer;
 
+        private Texture2D _background;
 
-    private Texture2D _backgroung;
+        private Player _player;
+        private Rectangle[] _platforms;  
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _player = new Player(
-                new Vector2(100, 100),
-                new Vector2(40, 65)
-                );
+            _screenSize = new Vector2(1280, 720);
+            _graphics.PreferredBackBufferWidth = (int)_screenSize.X;
+            _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
 
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 800;
+            _platforms[0] = new Rectangle(200, 590, 150, 30);
         }
 
         protected override void Initialize()
         {
-            _playerSize = new Vector2(40, 65);
-            _ground = 400;
+            _ground = _screenSize.Y;
+
+            _player = new Player(
+                new Vector2(50, 335),
+                new Vector2(40, 65)
+            );
+
             base.Initialize();
         }
 
@@ -43,43 +46,47 @@ namespace Project_g
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _backgroung = Content.Load<Texture2D>("images/background");
+            _background = Content.Load<Texture2D>("Images/background");
+
             _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
             _squareTexture.SetData(new[] { Color.Beige });
         }
 
         protected override void Update(GameTime gameTime)
         {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             GamePadState gamePad = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboard = Keyboard.GetState();
 
             if (gamePad.Buttons.Back == ButtonState.Pressed
-               
                 || keyboard.IsKeyDown(Keys.Escape))
                 Exit();
+
             Vector2 direction = new Vector2();
             if (keyboard.IsKeyDown(Keys.A))
             {
                 direction.X = -1;
             }
+
             if (keyboard.IsKeyDown(Keys.D))
             {
                 direction.X = 1;
             }
 
-            if (keyboard.IsKeyDown(Keys.Space) && (_jumpTimer <= 0))
+            if (keyboard.IsKeyDown(Keys.Space) && (_player.Velocity.Y == 0))
             {
+                _player.Jump();
             }
 
-            if (keyboard.IsKeyDown(Keys.S))
-            {
-                direction.Y = 1;
-            }
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _player.Move(direction, deltaTime);
+            _player.Update(deltaTime);
+            _player.SetDirection(direction);
 
-            if (_player.Position.Y < (_ground - _playerPosition.Y))
-                _player.Position.Y++;
+            if ((_player.Position.Y + _player.Size.Y) >= _ground)
+            {
+                _player.Velocity.Y = 0;
+                _player.Position.Y = _ground - _player.Size.Y;
+            }
+
             base.Update(gameTime);
         }
 
@@ -89,8 +96,16 @@ namespace Project_g
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_backgroung, Vector2.Zero, Color.White);
+            _spriteBatch.Draw(
+                _background, Vector2.Zero, Color.White);
 
+            for (int i = 0; i < _platforms.Length; ++i)
+            {
+                _spriteBatch.Draw(
+                    _squareTexture,
+                    _platforms[i],
+                    Color.RosyBrown);
+            }
             _spriteBatch.Draw(
                 _squareTexture,
                 new Rectangle(
@@ -99,12 +114,6 @@ namespace Project_g
                     (int)_player.Size.X,
                     (int)_player.Size.Y),
                 Color.Beige);
-
-            _spriteBatch.Draw (
-                _squareTexture,
-                new Rectangle(0, (int)_ground, 100, 100 ),
-                Color.DarkRed
-            );
 
             _spriteBatch.End();
 
