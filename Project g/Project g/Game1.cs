@@ -15,7 +15,8 @@ namespace Project_g
         private Texture2D _background;
 
         private Player _player;
-        private Rectangle[] _platforms;  
+
+        private Rectangle[] _platforms;
 
         public Game1()
         {
@@ -27,7 +28,10 @@ namespace Project_g
             _graphics.PreferredBackBufferWidth = (int)_screenSize.X;
             _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
 
-            _platforms[0] = new Rectangle(200, 590, 150, 30);
+            _platforms = new Rectangle[3];
+            _platforms[0] = new Rectangle(200, 600, 275, 40);
+            _platforms[1] = new Rectangle(400, 400, 275, 40);
+            _platforms[2] = new Rectangle(600, 200, 275, 40);
         }
 
         protected override void Initialize()
@@ -50,6 +54,10 @@ namespace Project_g
 
             _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
             _squareTexture.SetData(new[] { Color.Beige });
+
+            Texture2D playerTexture = new Texture2D(GraphicsDevice, 1, 1);
+            playerTexture.SetData(new[] { Color.Beige });
+            _player.LoadContent(playerTexture);
         }
 
         protected override void Update(GameTime gameTime)
@@ -81,6 +89,8 @@ namespace Project_g
             _player.Update(deltaTime);
             _player.SetDirection(direction);
 
+            ResolveCollisions();
+
             if ((_player.Position.Y + _player.Size.Y) >= _ground)
             {
                 _player.Velocity.Y = 0;
@@ -106,18 +116,50 @@ namespace Project_g
                     _platforms[i],
                     Color.RosyBrown);
             }
-            _spriteBatch.Draw(
-                _squareTexture,
-                new Rectangle(
-                    (int)_player.Position.X,
-                    (int)_player.Position.Y,
-                    (int)_player.Size.X,
-                    (int)_player.Size.Y),
-                Color.Beige);
+
+            _player.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void ResolveCollisions()
+        {
+            for (int i = 0; i < _platforms.Length; i++)
+            {
+                bool isCollidingLeft = (_player.Position.X + _player.Size.X)
+                    > _platforms[i].Left;
+                bool isCollidingTop = (_player.Position.Y + _player.Size.Y)
+                    > _platforms[i].Top;
+                bool isCollidingRight = _player.Position.X < _platforms[i].Right;
+                bool isCollidingBottom = _player.Position.Y
+                    < _platforms[i].Bottom;
+                bool isColliding = isCollidingLeft
+                    && isCollidingTop
+                    && isCollidingRight
+                    && isCollidingBottom;
+
+                if (isColliding)
+                {
+                    if ((isCollidingLeft || isCollidingRight)
+                        && (!isCollidingTop && !isCollidingBottom))
+                    {
+                        _player.Velocity.X *= -1;
+                    }
+
+                    if (isCollidingBottom)
+                    {
+                        _player.Velocity.Y *= -1;
+                    }
+
+                    if (isCollidingTop)
+                    {
+                        _player.Velocity.Y = 0;
+                        _player.Position.Y = _platforms[i].Top - _player.Size.Y;
+                    }
+                }
+            }
         }
     }
 }

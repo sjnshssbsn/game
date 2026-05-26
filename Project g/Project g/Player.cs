@@ -11,6 +11,7 @@ namespace Project_g
         private const float _jumpForce = 450f;
 
         private float _movementSpeed;
+        private Texture2D _texture;
 
         public Vector2 Position;
         public Vector2 Size;
@@ -23,6 +24,11 @@ namespace Project_g
             Size = size;
 
             _movementSpeed = 300;
+        }
+
+        public void LoadContent(Texture2D texture)
+        {
+            _texture = texture;
         }
 
         public void Update(float dt)
@@ -38,8 +44,16 @@ namespace Project_g
             Velocity.Y -= _jumpForce;
         }
 
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(
+                _texture,
+                new Rectangle(
+                    (int)Position.X,
+                    (int)Position.Y,
+                    (int)Size.X,
+                    (int)Size.Y),
+                Color.Beige);
         }
 
         public void SetDirection(Vector2 direction)
