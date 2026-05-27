@@ -15,6 +15,8 @@ namespace Project_g
         private Texture2D _background;
 
         private Player _player;
+        
+        private Enemy _enemy;
 
         private Rectangle[] _platforms;
 
@@ -39,6 +41,10 @@ namespace Project_g
             _ground = _screenSize.Y;
 
             _player = new Player(
+                new Vector2(50, 335),
+                new Vector2(40, 65)
+            );
+            _enemy = new Enemy(
                 new Vector2(50, 335),
                 new Vector2(40, 65)
             );
@@ -87,6 +93,7 @@ namespace Project_g
             }
 
             _player.Update(deltaTime);
+            _enemy.Update(deltaTime);
             _player.SetDirection(direction);
 
             ResolveCollisions();
