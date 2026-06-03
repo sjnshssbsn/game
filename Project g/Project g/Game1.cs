@@ -61,8 +61,7 @@ namespace Project_g
             _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
             _squareTexture.SetData(new[] { Color.Beige });
 
-            Texture2D playerTexture = new Texture2D(GraphicsDevice, 1, 1);
-            playerTexture.SetData(new[] { Color.Beige });
+            Texture2D playerTexture = Content.Load<Texture2D>(:"images/Player");
             _player.LoadContent(playerTexture);
         }
 
