@@ -6,6 +6,7 @@ namespace Project_g
 {
     public class Game1 : Game
     {
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _squareTexture;
@@ -13,12 +14,12 @@ namespace Project_g
         private float _ground;
 
         private Texture2D _background;
+        private Texture2D _platformTexture;
+        private Texture2D _platformsSpriteSheet;
 
         private Player _player;
-        
-        private Enemy _enemy;
 
-        private Rectangle[] _platforms;
+        private Platform[] _platforms;
 
         public Game1()
         {
@@ -30,10 +31,19 @@ namespace Project_g
             _graphics.PreferredBackBufferWidth = (int)_screenSize.X;
             _graphics.PreferredBackBufferHeight = (int)_screenSize.Y;
 
-            _platforms = new Rectangle[3];
-            _platforms[0] = new Rectangle(200, 600, 275, 40);
-            _platforms[1] = new Rectangle(400, 400, 275, 40);
-            _platforms[2] = new Rectangle(600, 200, 275, 40);
+            _platforms = new Platform[3];
+            _platforms[0] = new Platform(
+                new Vector2(200, 600),
+                new Vector2(275, 40)
+            );
+            _platforms[1] = new Platform(
+                new Vector2(400, 400),
+                new Vector2(275, 40)
+            );
+            _platforms[2] = new Platform(
+                new Vector2(600, 200),
+                new Vector2(275, 40)
+            );
         }
 
         protected override void Initialize()
@@ -41,10 +51,6 @@ namespace Project_g
             _ground = _screenSize.Y;
 
             _player = new Player(
-                new Vector2(50, 335),
-                new Vector2(40, 65)
-            );
-            _enemy = new Enemy(
                 new Vector2(50, 335),
                 new Vector2(40, 65)
             );
@@ -57,11 +63,13 @@ namespace Project_g
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _background = Content.Load<Texture2D>("Images/background");
+            _platformTexture = Content.Load<Texture2D>("Images/platform-stone");
+            _platformsSpriteSheet = Content.Load<Texture2D>("Images/platforms");
 
             _squareTexture = new Texture2D(GraphicsDevice, 1, 1);
             _squareTexture.SetData(new[] { Color.Beige });
 
-            Texture2D playerTexture = Content.Load<Texture2D>(:"images/Player");
+            Texture2D playerTexture = Content.Load<Texture2D>("Images/main-character-sqr");
             _player.LoadContent(playerTexture);
         }
 
@@ -92,7 +100,6 @@ namespace Project_g
             }
 
             _player.Update(deltaTime);
-            _enemy.Update(deltaTime);
             _player.SetDirection(direction);
 
             ResolveCollisions();
@@ -101,6 +108,7 @@ namespace Project_g
             {
                 _player.Velocity.Y = 0;
                 _player.Position.Y = _ground - _player.Size.Y;
+                _player.Collider.Location = _player.Position.ToPoint();
             }
 
             base.Update(gameTime);
@@ -118,9 +126,11 @@ namespace Project_g
             for (int i = 0; i < _platforms.Length; ++i)
             {
                 _spriteBatch.Draw(
-                    _squareTexture,
+                    _platformsSpriteSheet,
                     _platforms[i],
-                    Color.RosyBrown);
+                    new Rectangle(100, 128, 864, 128),
+                    Color.White
+                );
             }
 
             _player.Draw(_spriteBatch);
@@ -134,38 +144,48 @@ namespace Project_g
         {
             for (int i = 0; i < _platforms.Length; i++)
             {
-                bool isCollidingLeft = (_player.Position.X + _player.Size.X)
-                    > _platforms[i].Left;
-                bool isCollidingTop = (_player.Position.Y + _player.Size.Y)
-                    > _platforms[i].Top;
-                bool isCollidingRight = _player.Position.X < _platforms[i].Right;
-                bool isCollidingBottom = _player.Position.Y
-                    < _platforms[i].Bottom;
-                bool isColliding = isCollidingLeft
-                    && isCollidingTop
-                    && isCollidingRight
-                    && isCollidingBottom;
-
-                if (isColliding)
+                Vector2 collisionData = GetCollisionData(_player.Collider, _platforms[i]);
+                if (collisionData == Vector2.Zero)
+                    continue;
+                _player.Position += collisionData;
+                _player.Collider.Location = _player.Position.ToPoint();
+                if (collisionData.X != 0)
                 {
-                    if ((isCollidingLeft || isCollidingRight)
-                        && (!isCollidingTop && !isCollidingBottom))
-                    {
-                        _player.Velocity.X *= -1;
-                    }
-
-                    if (isCollidingBottom)
-                    {
-                        _player.Velocity.Y *= -1;
-                    }
-
-                    if (isCollidingTop)
+                    _player.Velocity.X = 0;
+                }
+                else
+                {
+                    if (collisionData.Y < 0)
                     {
                         _player.Velocity.Y = 0;
-                        _player.Position.Y = _platforms[i].Top - _player.Size.Y;
+                    }
+                    else
+                    {
+                        _player.Velocity.Y = 0.1f;
                     }
                 }
             }
+        }
+
+        private Vector2 GetCollisionData(Rectangle a, Rectangle b)
+        {
+            Vector2 result = Vector2.Zero;
+            if (a.Intersects(b))
+            {
+                Rectangle overlap = Rectangle.Intersect(a, b);
+                if (overlap.Width < overlap.Height)
+                {
+                    int direction = a.Center.X < b.Center.X ? -overlap.Width : overlap.Width;
+                    result.X = direction;
+                }
+                else
+                {
+                    int direction = a.Center.Y < b.Center.Y ? -overlap.Height : overlap.Height;
+                    result.Y = direction;
+                }
+            }
+            return result;
+
         }
     }
 }
