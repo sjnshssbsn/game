@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\platform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|c:\\users\\student.desktop-0e26r94\\documents\\my-mono-game\\project g\\project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA957B1C-44E4-488F-8B2B-4208BC976952}|Project g\\Project g.csproj|solutionrelative:project g\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,14 +36,14 @@
               "RelativeDocumentMoniker": "Project g\\Platform.cs",
               "ToolTip": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Platform.cs",
               "RelativeToolTip": "Project g\\Platform.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-09T08:58:08.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Enemy.cs",
               "RelativeDocumentMoniker": "Project g\\Enemy.cs",
@@ -55,27 +55,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Player.cs",
               "RelativeDocumentMoniker": "Project g\\Player.cs",
               "ToolTip": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Player.cs",
               "RelativeToolTip": "Project g\\Player.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAA5wA0AAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-15T06:22:44.251Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Game1.cs",
               "RelativeDocumentMoniker": "Project g\\Game1.cs",
               "ToolTip": "C:\\Users\\Student.DESKTOP-0E26R94\\Documents\\my-mono-game\\Project g\\Project g\\Game1.cs",
               "RelativeToolTip": "Project g\\Game1.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAcwFUAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAL4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T08:39:56.519Z"
+              "WhenOpened": "2026-03-27T08:39:56.519Z",
+              "EditorCaption": ""
             }
           ]
         }
