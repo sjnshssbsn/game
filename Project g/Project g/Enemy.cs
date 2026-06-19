@@ -1,64 +1,61 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
-namespace Project_g
+public class Enemy
 {
-    internal class Enemy
+    private const float _gravity = 9.8f;
+
+    private float _movementSpeed;
+    private Texture2D _texture;
+
+    public Rectangle Collider;
+    public Vector2 Position;
+    public Vector2 Size;
+
+    public Vector2 Velocity;
+
+    public Enemy(Vector2 position, Vector2 size)
     {
-         private const float _gravity = 9.8f;
-            private const float _jumpForce = 450f;
+        Position = position;
+        Size = size;
 
-            private float _movementSpeed;
-            private Texture2D _texture;
+        _movementSpeed = 300;
+        Collider = new Rectangle(Position.ToPoint(), Size.ToPoint());
+    }
 
-            public Vector2 Position;
-            public Vector2 Size;
+    public void LoadContent(Texture2D texture)
+    {
+        _texture = texture;
+    }
 
-            public Vector2 Velocity;
+    public void Update(float dt, Vector2 targetPosition)
+    {
+        Vector2 direction = targetPosition - Position;
 
-            public Enemy(Vector2 position, Vector2 size)
-            {
-                Position = position;
-                Size = size;
+        if (direction != Vector2.Zero)
+        {
+            direction.Normalize();
+        }
 
-                _movementSpeed = 300;
-            }
+        Velocity.X = direction.X;
+        Velocity.Y += _gravity;
 
-            public void LoadContent(Texture2D texture)
-            {
-                _texture = texture;
-            }
+        Position.X += Velocity.X * _movementSpeed * dt;
+        Position.Y += Velocity.Y * dt;
 
-            public void Update(float dt)
-            {
-                Velocity.Y += _gravity;
+        Collider.X = (int)Position.X;
+        Collider.Y = (int)Position.Y;
+    }
 
-                Position.X += Velocity.X * _movementSpeed * dt;
-                Position.Y += Velocity.Y * dt;
-            }
-
-            public void Jump()
-            {
-                Velocity.Y -= _jumpForce;
-            }
-
-            public void Draw(SpriteBatch spriteBatch)
-            {
-                spriteBatch.Draw(
-                    _texture,
-                    new Rectangle(
-                        (int)Position.X,
-                        (int)Position.Y,
-                        (int)Size.X,
-                        (int)Size.Y),
-                    Color.Beige);
-            }
-
-            public void SetDirection(Vector2 direction)
-            {
-                Velocity.X = direction.X;
-            }
-        
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(
+            _texture,
+            new Rectangle(
+                (int)Position.X,
+                (int)Position.Y,
+                (int)Size.X,
+                (int)Size.Y),
+            Color.Red);
     }
 }
